@@ -169,7 +169,7 @@ func MM_Cvtss2si(a C.__m128) C.int {
 }
 
 func MM_Cvtpi16ps(a C.__m64) C.__m128 {
-	return C._mm_cvtpi16_ps(a, b)
+	return C._mm_cvtpi16_ps(a)
 }
 
 func MM_Cvtpi32ps(a C.__m128, b C.__m64) C.__m128 {
@@ -181,27 +181,27 @@ func MM_Cvtpi32x2ps(a C.__m64, b C.__m64) C.__m128 {
 }
 
 func MM_Cvtpi8ps(a C.__m64) C.__m128 {
-	return C._mm_cvtpi8_ps(a, b)
+	return C._mm_cvtpi8_ps(a)
 }
 
 func MM_Cvtpspi16(a C.__m128) C.__m64 {
-	return C._mm_cvtps_pi16(a, b)
+	return C._mm_cvtps_pi16(a)
 }
 
 func MM_Cvtpspi32(a C.__m128) C.__m64 {
-	return C._mm_cvtps_pi32(a, b)
+	return C._mm_cvtps_pi32(a)
 }
 
 func MM_Cvtpspi8(a C.__m128) C.__m64 {
-	return C._mm_cvtps_pi8(a, b)
+	return C._mm_cvtps_pi8(a)
 }
 
 func MM_Cvtpu16ps(a C.__m64) C.__m128 {
-	return C._mm_cvtpu16_ps(a, b)
+	return C._mm_cvtpu16_ps(a)
 }
 
 func MM_Cvtpu8ps(a C.__m64) C.__m128 {
-	return C._mm_cvtpu8_ps(a, b)
+	return C._mm_cvtpu8_ps(a)
 }
 
 func MM_Cvtsi32ss(a C.__m128, b C.int) C.__m128 {
@@ -213,35 +213,35 @@ func MM_Cvtsi64ss(a C.__m128, b C.__int64) C.__m128 {
 }
 
 func MM_Cvtssf32(a C.__m128) C.float {
-	return C._mm_cvtss_f32(a, b)
+	return C._mm_cvtss_f32(a)
 }
 
 func MM_Cvtsssi32(a C.__m128) C.int {
-	return C._mm_cvtss_si32(a, b)
+	return C._mm_cvtss_si32(a)
 }
 
 func MM_Cvtsssi64(a C.__m128) C.__int64 {
-	return C._mm_cvtss_si64(a, b)
+	return C._mm_cvtss_si64(a)
 }
 
 func MM_Cvttps2pi(a C.__m128) C.__m64 {
-	return C._mm_cvtt_ps2pi(a, b)
+	return C._mm_cvtt_ps2pi(a)
 }
 
 func MM_Cvttss2si(a C.__m128) C.int {
-	return C._mm_cvtt_ss2si(a, b)
+	return C._mm_cvtt_ss2si(a)
 }
 
 func MM_Cvttpspi32(a C.__m128) C.__m64 {
-	return C._mm_cvttps_pi32(a, b)
+	return C._mm_cvttps_pi32(a)
 }
 
 func MM_Cvttsssi32(a C.__m128) C.int {
-	return C._mm_cvttss_si32(a, b)
+	return C._mm_cvttss_si32(a)
 }
 
 func MM_Cvttsssi64(a C.__m128) C.__int64 {
-	return C._mm_cvttss_si64(a, b)
+	return C._mm_cvttss_si64(a)
 }
 
 func MM_Divps(a C.__m128, b C.__m128) C.__m128 {
@@ -277,11 +277,11 @@ func MM_Getcsr() uint {
 }
 
 func MM_Insertpi16(a C.__m64, b C.int, c C.int) C.__m64 {
-	return C._mm_insert_pi16(a, b)
+	return C._mm_insert_pi16(a, b, c)
 }
 
-func M_Maskmovq(a C.__m64, b C.__m64, c (*C.char)) {
-	return C._m_maskmovq(a, b)
+func M_Maskmovq(a C.__m64, b C.__m64, c []byte) {
+	return C._m_maskmovq(a, b, (*C.char)(&c[0]))
 }
 
 func M_Pavgb(a C.__m64, b C.__m64) C.__m64 {
@@ -332,8 +332,8 @@ func M_Pshufw(a C.__m64, b C.int) C.__m64 {
 	return _m_pshufw(a, b)
 }
 
-func MM_Maskmovesi64(a C.__m64, b C.__m64, c (*C.char)) {
-	return C._mm_maskmove_si64(a, b, c)
+func MM_Maskmovesi64(a C.__m64, b C.__m64, c []byte{
+	return C._mm_maskmove_si64(a, b, (*C.char)(&c[0]))
 }
 
 func MM_Maxpi16(a C.__m64, b C.__m64) C.__m64 { 
@@ -403,8 +403,8 @@ func MM_Orps(a C.__m128, b C.__m128) C.__m128 {
 	return C._mm_or_ps(a, b)
 }
 
-func MM_Prefetch(a (*C.char),b C.int) {
-	return C._mm_prefetch(a, b)
+func MM_Prefetch(a []byte,b C.int) {
+	return C._mm_prefetch((*C.char)(&a[0]), b)
 }
 
 func MM_Rcpps(a C.__m128) C.__m128 {
