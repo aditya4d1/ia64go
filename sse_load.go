@@ -3,6 +3,7 @@ package sse_load
 /*
  #include<xmmintrin.h>
 */
+import "C"
 
 func MM_Load1ps(x *float32) C.__m128 {
 	return C._mm_load1_ps((*C.float)(x))

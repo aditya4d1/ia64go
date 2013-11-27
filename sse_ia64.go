@@ -1,10 +1,11 @@
 
 
-package sse_ia64go
+package sse_ia64
 
 /*
  #include<xmmintrin.h>
 */
+import "C"
 
 func MM_Addps(a C.__m128, b C.__m128) C.__m128 {
 	return C._mm_add_ps(a, b)
@@ -255,24 +256,24 @@ func MM_Extractpi16(a C.__m64, b C.int) C.int {
 	return C._mm_extract_pi16(a, b)
 }
 
-func MM_GET_EXCEPTION_MASK() C.(unsigned int) {
-	return _MM_GET_EXCEPTION_MASK()
+func MM_GET_EXCEPTION_MASK() uint {
+	return (uint)(C._MM_GET_EXCEPTION_MASK())
 }
 
-func MM_GET_EXCEPTION_STATE() C.(unsigned int) {
-	return _MM_GET_EXCEPTION_STATE()
+func MM_GET_EXCEPTION_STATE() uint {
+	return (uint)(C._MM_GET_EXCEPTION_STATE())
 }
 
-func MM_GET_FLUSH_ZERO_MODE() C.(unsigned int) {
-	return _MM_GET_FLUSH_ZERO_MODE()
+func MM_GET_FLUSH_ZERO_MODE() uint {
+	return (uint)(C._MM_GET_FLUSH_ZERO_MODE())
 }
 
-func MM_GET_ROUNDING_MODE() C.(unsigned int) {
-	return _MM_GET_ROUNDING_MODE()
+func MM_GET_ROUNDING_MODE() uint {
+	return (uint)(C._MM_GET_ROUNDING_MODE())
 }
 
-func MM_Getcsr() C.(unsigned int) {
-	return _mm_getcsr(void)
+func MM_Getcsr() uint {
+	return (uint)(C._mm_getcsr(void))
 }
 
 func MM_Insertpi16(a C.__m64, b C.int, c C.int) C.__m64 {

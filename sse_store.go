@@ -5,6 +5,7 @@ package sse_store
 /*
  #include<xmmintrin.h>
 */
+import "C"
 
 func MM_Store1ps(x *float32, a C.__m128) {
 	C._mm_store1_ps((*C.float)(x), (C.__m128)(a))
