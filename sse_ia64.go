@@ -3,9 +3,12 @@ package sse_ia64
 
 /*
  #include<xmmintrin.h>
- #include<mmintrin.h>
+ void __MM_TRANSPOSE4_PS(__m128 a , __m128 b, __m128 c, __m128 d) {
+	_MM_TRANSPOSE4_PS(a, b, c, d);
+ }
 */
 import "C"
+import "unsafe"
 
 func MM_Addps(a C.__m128, b C.__m128) C.__m128 {
 	return C._mm_add_ps(a, b)
@@ -128,28 +131,28 @@ func MM_Cmpunordss(a C.__m128, b C.__m128) C.__m128 {
 	return C._mm_cmpunord_ss(a, b)
 }
 
-func MM_Comieqss(a C.__m128, b C.__m128) C.int {
-	return C._mm_comieq_ss(a, b)
+func MM_Comieqss(a C.__m128, b C.__m128) int {
+	return int(C._mm_comieq_ss(a, b))
 }
 
-func MM_Comigess(a C.__m128, b C.__m128) C.int {
-	return C._mm_comige_ss(a, b)
+func MM_Comigess(a C.__m128, b C.__m128) int {
+	return int(C._mm_comige_ss(a, b))
 }
 
-func MM_Comigtss(a C.__m128, b C.__m128) C.int {
-	return C._mm_comigt_ss(a, b)
+func MM_Comigtss(a C.__m128, b C.__m128) int {
+	return int(C._mm_comigt_ss(a, b))
 }
 
-func MM_Comiless(a C.__m128, b C.__m128) C.int {
-	return C._mm_comile_ss(a, b)
+func MM_Comiless(a C.__m128, b C.__m128) int {
+	return int(C._mm_comile_ss(a, b))
 }
 
-func MM_Comiltss(a C.__m128, b C.__m128) C.int {
-	return C._mm_comilt_ss(a, b)
+func MM_Comiltss(a C.__m128, b C.__m128) int {
+	return int(C._mm_comilt_ss(a, b))
 }
 
-func MM_Comineqss(a C.__m128, b C.__m128) C.int {
-	return C._mm_comineq_ss(a, b)
+func MM_Comineqss(a C.__m128, b C.__m128) int {
+	return int(C._mm_comineq_ss(a, b))
 }
 
 func MM_Cvtpi2ps(a C.__m128, b C.__m64) C.__m128 {
@@ -160,12 +163,12 @@ func MM_Cvtps2pi(a C.__m128) C.__m64 {
 	return C._mm_cvt_ps2pi(a)
 }
 
-func MM_Cvtsi2ss(a C.__m128, b C.int) C.__m128 {
-	return C._mm_cvt_si2ss(a, b)
+func MM_Cvtsi2ss(a C.__m128, b int) C.__m128 {
+	return C._mm_cvt_si2ss(a, (C.int)(b))
 }
 
-func MM_Cvtss2si(a C.__m128) C.int {
-	return C._mm_cvt_ss2si(a)
+func MM_Cvtss2si(a C.__m128) int {
+	return int(C._mm_cvt_ss2si(a))
 }
 
 func MM_Cvtpi16ps(a C.__m64) C.__m128 {
@@ -254,7 +257,7 @@ func MM_Divss(a C.__m128, b C.__m128) C.__m128 {
 /*
 func MM_Extractpi16(a C.__m64, b int) int {
 	return int(C._mm_extract_pi16(a, C.int(b)))
-}
+} You need 2bit integer for b
 */
 func MM_GET_EXCEPTION_MASK() uint {
 	return (uint)(C._MM_GET_EXCEPTION_MASK())
@@ -278,10 +281,10 @@ func MM_Getcsr() uint {
 /*
 func MM_Insertpi16(a C.__m64, b int, c int) C.__m64 {
 	return C._mm_insert_pi16(a, (C.int)(b), (C.int)(c))
-}
+} You need 2-bit integer c
 */
 func M_Maskmovq(a C.__m64, b C.__m64, c []byte) {
-	C._m_maskmovq(a, b, (*C.char)(&c[0]))
+	C._m_maskmovq(a, b, (*C.char)(unsafe.Pointer(&c[0])))
 }
 
 func M_Pavgb(a C.__m64, b C.__m64) C.__m64 {
@@ -294,12 +297,11 @@ func M_Pavgw(a C.__m64, b C.__m64) C.__m64 {
 /*
 func M_Pextrw(a C.__m64, b int) int {
 	return (int)(C._m_pextrw(a, C.int(b)))
-}
-*/
-/*
+} You need 2-bit integer b
+
 func M_Pinsrw(a C.__m64, b int, c int) C.__m64 {
 	return C._m_pinsrw(a, C.int(b), C.int(c))
-}
+} You need 2-bit integer c
 */
 func M_Pmaxsw(a C.__m64, b C.__m64) C.__m64 {
 	return C._m_pmaxsw(a, b)
@@ -328,14 +330,15 @@ func M_Pmulhuw(a C.__m64, b C.__m64) C.__m64 {
 func M_Psadbw(a C.__m64, b C.__m64) C.__m64 {
 	return C._m_psadbw(a, b)
 }
+
 /*
 func M_Pshufw(a C.__m64, b C.int) C.__m64 {
-	return _m_pshufw(a, b)
+	return C._m_pshufw(a, b)
 }
 */
 
 func MM_Maskmovesi64(a C.__m64, b C.__m64, c []byte) {
-	C._mm_maskmove_si64(a, b, (*C.char)(&c[0]))
+	C._mm_maskmove_si64(a, b, (*C.char)(unsafe.Pointer(&c[0])))
 }
 
 func MM_Maxpi16(a C.__m64, b C.__m64) C.__m64 { 
@@ -407,7 +410,7 @@ func MM_Orps(a C.__m128, b C.__m128) C.__m128 {
 /*
 func MM_Prefetch(a []byte,b C.int) {
 	C._mm_prefetch((*C.char)(&a[0]), b)
-}
+} You nedd 2-bit integer b
 */
 func MM_Rcpps(a C.__m128) C.__m128 {
 	return C._mm_rcp_ps(a)
@@ -432,31 +435,31 @@ func MM_Sadpu8(a C.__m64, b C.__m64) C.__m64 {
 func MM_Set1ps(a float32) C.__m128 {
 	return C._mm_set1_ps((C.float)(a))
 }
-/*
+
 func MM_SET_EXCEPTION_MASK(a uint32) {
-	_MM_SET_EXCEPTION_MASK((C.uint)(a))
+	C._MM_SET_EXCEPTION_MASK((C.uint)(a))
 }
 
 func MM_SET_EXCEPTION_STATE(a uint32) {
-	_MM_SET_EXCEPTION_STATE((C.uint)(a))
+	C._MM_SET_EXCEPTION_STATE((C.uint)(a))
 }
 
 func MM_SET_FLUSH_ZERO_MODE(a uint32) {
-	_MM_SET_FLUSH_ZERO_MODE((C.uint)(a))
+	C._MM_SET_FLUSH_ZERO_MODE((C.uint)(a))
 }
 
 func MM_Setps(d float32, c float32, b float32, a float32) C.__m128 {
-	return _mm_set_ps((C.float)(d) ,(C.float)(c), (C.float)(b), (C.float)(d))
+	return C._mm_set_ps((C.float)(d) ,(C.float)(c), (C.float)(b), (C.float)(d))
 }
-*/
+
 func MM_Setps1(a float32) C.__m128 {
 	return C._mm_set_ps1((C.float)(a))
 }
-/*
+
 func MM_SET_ROUNDING_MODE(a uint){
-	_MM_SET_ROUNDING_MODE((C.uint)(a))
+	C._MM_SET_ROUNDING_MODE((C.uint)(a))
 }
-*/
+
 func MM_Setss(a float32) C.__m128 {
 	return C._mm_set_ss((C.float)(a))
 }
@@ -474,7 +477,7 @@ func MM_Sfence(){
 /*
 func MM_Shufflepi16(a C.__m64, b int) C.__m64 {
 	return C._mm_shuffle_pi16(a, (C.int)(b))
-}
+} // You need a 8-bit integer for b
 */
 func MM_Sqrtps(a C.__m128) C.__m128 {
 	return C._mm_sqrt_ps(a)
@@ -499,11 +502,11 @@ func MM_Subps(a C.__m128, b C.__m128) C.__m128 {
 func MM_Subss(a C.__m128, b C.__m128) C.__m128 {
 	return C._mm_sub_ss(a, b)
 }
-/*
+
 func MM_TRANSPOSE4_PS(a C.__m128, b C.__m128, c C.__m128, d C.__m128){
-	C._MM_TRANSPOSE4_PS(a, b, c, d)
+	C.__MM_TRANSPOSE4_PS(a, b, c, d)
 }
-*/
+
 func MM_Ucomieqss(a C.__m128, b C.__m128) C.int {
 	return C._mm_ucomieq_ss(a, b)
 }
