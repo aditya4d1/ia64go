@@ -1,4 +1,18 @@
 
+package mmx_ia64
+
+/*
+ #include<mmintrin.h>
+*/
+
+func MM_Addpi16(a C.__m64, b C.__m64) C.__m64 {
+	return C._mm_add_pi16(a, b)
+}
+
+func MM_Addpi32(a C.__m64, b C.__m64) C.__m64 {
+	return C._mm_add_pi32(a, b)
+}
+
 func MM_Addpi8(a C.__m64, b C.__m64) C.__m64 {
 	return C._mm_add_pi8(a, b)
 }
