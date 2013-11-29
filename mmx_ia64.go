@@ -4,6 +4,8 @@ package mmx_ia64
 /*
  #include<mmintrin.h>
 */
+import "C"
+
 
 func MM_Addpi16(a C.__m64, b C.__m64) C.__m64 {
 	return C._mm_add_pi16(a, b)
@@ -65,8 +67,8 @@ func MM_Cmpgetpi8 (a C.__m64, b C.__m64) C.__m64 {
 	return C._mm_cmpgt_pi8(a, b);
 }
 
-func MM_Cvtm64si64(a C.__m64, b C.__m64) int64 {
-	return int64(C._mm_cvtm64_si64(a , b ))
+func MM_Cvtm64si64(a C.__m64) int64 {
+	return int64(C._mm_cvtm64_si64(a))
 }
 
 func MM_Cvtsi32_si64 (a int) C.__m64 {
@@ -101,7 +103,7 @@ func M_Packssdw(a C.__m64, b C.__m64) C.__m64 {
 }
 
 func M_Packsswb(a C.__m64, b C.__m64) C.__m64 {
-	return C._m_packsswb
+	return C._m_packsswb(a, b)
 }
 
 func M_Packuswb(a C.__m64, b C.__m64) C.__m64 {
@@ -304,7 +306,7 @@ func M_Toint(a C.__m64) int {
 	return (int)(C._m_to_int(a))
 }
 
-func M_Toint64(a C.__m64){
+func M_Toint64(a C.__m64) int64 {
 	return (int64)(C._m_to_int64(a))
 }
 
@@ -336,16 +338,28 @@ func MM_Packspu16(a C.__m64, b C.__m64) C.__m64 {
 	return C._mm_packs_pu16(a, b)
 }
 
-func MM_Set1pi16(a int16, b int16, c int16, d int16) C.__m64 {
-	return C._mm_set1_pi16((C.short)(a), (C. short)(b), (C.short)(c), (C.short)(d))
+func MM_Set1pi16(a int16) C.__m64 {
+	return C._mm_set1_pi16((C.short)(a))
 }
 
-func MM_Set1pi32(a int, b int) C.__m64 {
-	return C._mm_set1_pi32((C.int)(a),(C.int)(b))
+func MM_Set1pi32(a int) C.__m64 {
+	return C._mm_set1_pi32((C.int)(a))
 }
 
-func MM_Set1pi8(a byte, b byte, c byte, d byte, e byte, f byte, g byte, h byte) C.__m64 {
-	return C._mm_set1_pi8((C.char)(a), (C.char)(b), (C.char)(c), (C.char)(d), (C.char)(e), (C.char)(f), (C.char)(g), (C.char)(h))
+func MM_Set1pi8(a byte) C.__m64 {
+	return C._mm_set1_pi8((C.char)(a))
+}
+
+func MM_Setpi16(a int16, b int16, c int16, d int16) C.__m64 {
+	return C._mm_set_pi16((C.short)(a), (C.short)(b), (C.short)(c), (C.short)(d))
+}
+
+func MM_Setpi32(a int, b int) C.__m64 {
+	return C._mm_set_pi32((C.int)(a), (C.int)(b))
+}
+
+func MM_Setpi8(a byte, b byte, c byte, d byte, e byte, f byte, g byte, h byte) C.__m64 {
+	return C._mm_set_pi8((C.char)(a), (C.char)(b), (C.char)(c), (C.char)(d), (C.char)(e), (C.char)(f), (C.char)(g), (C.char)(h))
 }
 
 func MM_Setrpi16(a int16, b int16, c int16, d int16) C.__m64 {
@@ -384,8 +398,8 @@ func MM_Sllipi32(a C.__m64, b int) C.__m64 {
 	return C._mm_slli_pi32(a, (C.int)(b))
 }
 
-func MM_Sllipi64(a C.__m64, b int) C.__m64 {
-	return C._mm_slli_pi64(a, (C.int)(b))
+func MM_Sllisi64(a C.__m64, b int) C.__m64 {
+	return C._mm_slli_si64(a, (C.int)(b))
 }
 
 func MM_Srapi16(a C.__m64, b C.__m64) C.__m64 {

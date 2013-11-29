@@ -2,6 +2,7 @@ package avx_ia64
 
 /*
  #include<immintrin.h>
+ #include<avxintrin.h>
 */
 import "C"
 
@@ -25,7 +26,7 @@ func M256_Andpd(a C.__m256d, b C.__m256d) C.__m256d {
 	return C._mm256_and_pd(a, b)
 }
 
-func M256_Andps(a C.__m256, b C.__m256) C.__m256) C.__m256 {
+func M256_Andps(a C.__m256, b C.__m256) C.__m256 {
 	return C._mm256_and_ps(a, b)
 }
 
