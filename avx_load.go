@@ -1,7 +1,7 @@
 package avx_load
 
 /*
- #include<>
+ #include<immintrin.h>
 */
 import "C"
 
