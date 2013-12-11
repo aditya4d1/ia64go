@@ -3,6 +3,9 @@ package avx_ia64
 /*
  #include<immintrin.h>
  #include<avxintrin.h>
+ __m256d MM256PdCmp(__m256d a, __m256d b, int c){
+	return (__m256d)_mm256_cmp_pd(a, b, c);
+ }
 */
 import "C"
 
@@ -26,7 +29,7 @@ func M256_Andpd(a C.__m256d, b C.__m256d) C.__m256d {
 	return C._mm256_and_pd(a, b)
 }
 
-func M256_Andps(a C.__m256, b C.__m256) C.__m256) C.__m256 {
+func M256_Andps(a C.__m256, b C.__m256) C.__m256 {
 	return C._mm256_and_ps(a, b)
 }
 
@@ -135,7 +138,7 @@ func MM_Cmpps(a C.__m128d, b C.__m128d, c int) C.__m128d {
 }
 
 func M256_Cmppd(a C.__m256d, b C.__m256d, c int) C.__m256d {
-	return C._m256_cmp_pd(a, b, (C.int)(c))
+	return C.(a, b, (C.int)(c))
 }
 
 func MM_Cmpps(a C.__m128, b C.__m128, c int) C.__m128 {
