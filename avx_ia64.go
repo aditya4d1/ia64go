@@ -1,10 +1,115 @@
 package avx_ia64
 
 /*
+ #cgo CFLAGS: -mavx
  #include<immintrin.h>
- #include<avxintrin.h>
  __m256d MM256PdCmp(__m256d a, __m256d b, int c){
 	return (__m256d)_mm256_cmp_pd(a, b, c);
+ }
+ __m256 MM256PsCmp(__m256 a, __m256 b, int c){
+	return (__m256)_mm256_cmp_ps(a, b, c);
+ }
+ __m128d MMPdCmp(__m128d a, __m128d b, int c){
+	return (__m128d)_mm_cmp_pd(a, b, c);
+ }
+ __m128d MMSdCmp(__m128d a, __m128d b, int c){
+	return (__m128d)_mm_cmp_sd(a, b, c);
+ }
+ __m128 MMSsCmp(__m128 a, __m128 b, int c){
+	return (__m128)_mm_cmp_ss(a, b, c);
+ }
+ __m128 MMPsCmp(__m128 a, __m128 b, int c){
+	return (__m128)_mm_cmp_ps(a, b, c);
+ }
+ __m256d MM256PdInsertf128(__m256d a, __m128d b, int c){
+	return (__m256d)_mm256_insertf128_pd(a, b, c);
+ }
+ __m256 MM256PsInsertf128(__m256 a, __m128 b, int c){
+	return (__m256)_mm256_insertf128_ps(a, b, c);
+ }
+ __m256d MM256PdFloor(__m256d a){
+	return (__m256d)_mm256_floor_pd(a);
+ }
+ __m256 MM256PsFloor(__m256 a){
+	return (__m256)_mm256_floor_ps(a);
+ }
+ __m256d MM256PdCeil(__m256d a){
+	return (__m256d)_mm256_ceil_pd(a);
+ }
+ __m256 MM256PsCeil(__m256 a){
+	return (__m256)_mm256_ceil_ps(a);
+ }
+ __m256d MM256PdPermute(__m256d a, int b){
+	return (__m256d)_mm256_permute_pd(a, b);
+ }
+ __m256 MM256PsPermute(__m256 a, int b){
+	return (__m256)_mm256_permute_ps(a, b);
+ }
+ __m128d MMPdPermute(__m128d a, int b){
+	return (__m128d)_mm_permute_pd(a, b);
+ }
+ __m128 MMPsPermute(__m128 a, int b){
+	return (__m128)_mm_permute_ps(a, b);
+ }
+ __m256d MM256PdBlend(__m256d a, __m256d b, int c){
+	return (__m256d)_mm256_blend_pd(a, b, c);
+ }
+ __m256 MM256PsBlend(__m256 a, __m256 b, int c){
+	return (__m256)_mm256_blend_ps(a, b, c);
+ }
+ __m256d MM256PdRound(__m256d a, int b){
+	return (__m256d)_mm256_round_pd(a, b);
+ }
+ __m256 MM256PsRound(__m256 a, int b){
+	return (__m256)_mm256_round_ps(a, b);
+ }
+ __m256 MM256M128Set(__m128 a, __m128 b){
+	return (__m256)_mm256_set_m128(a, b);
+ }
+ __m256d MM256M128dSet(__m128d a, __m128d b){
+	return (__m256d)_mm256_set_m128d(a, b);
+ }
+ __m256i MM256M128iSet(__m128i a, __m128i b){
+	return (__m256i)_mm256_set_m128i(a, b);
+ }
+ __m256 MM256M128Setr(__m128 a, __m128 b){
+	return (__m256)_mm256_setr_m128(a, b);
+ }
+ __m256i MM256M128iSetr(__m128i a, __m128i b){
+	return (__m256i)_mm256_setr_m128i(a, b);
+ }
+ __m256d MM256M128dSetr(__m128d a, __m128d b){
+	return (__m256d)_mm256_setr_m128d(a, b);
+ }
+ __m128d MM256PdExtractf128(__m256d a, int b){
+	return (__m128d)_mm256_extractf128_pd(a, b);
+ }
+ __m128 MM256PsExtractf128(__m256 a, int b){
+	return (__m128)_mm256_extractf128(a, b);
+ }
+ __m128i MM256Si256Extractf128(__m256i a, int b){
+	return (__m128i)_mm256_extractf128_si256(a, b);
+ }
+ __m256d MM256PdPermute2f128(__m256d a, __m256d b, int c){
+	return (__m256d)_mm256_permute2f128_pd(a, b, c);
+ }
+ __m256 MM256PsPermute2f128(__m256 a, __m256 b, int c){
+	return (__m256)_mm256_permute2f128_ps(a, b, c);
+ }
+ __m256i MM256Si256Permute2f128(__m256i a, __m256i b, int c){
+	return (__m256i)_mm256_permute2f128_si256(a, b, c);
+ }
+ __m256i MM256Si256Insertf128(__m256i a, __m128i b, int c){
+	return (__m256i)_mm256_insertf128_si256(a, b, c);
+ }
+ __m256 MM256PsShuffle(__m256 a, __m256 b, int c){
+	return (__m256)_mm256_shuffle_ps(a, b, c);
+ }
+ __m256d MM256PdShuffle(__m256d a, __m256d b, int c){
+	return (__m256d)_mm256_shuffle_pd(a, b, c);
+ }
+ __m256 MM256PsDp(__m256 a, __m256 b, int c){
+	return (__m256)_mm256_dp_ps(a, b, c);
  }
 */
 import "C"
@@ -42,11 +147,11 @@ func M256_Andnotps(a C.__m256, b C.__m256) C.__m256 {
 }
 
 func M256_Blendpd(a C.__m256d, b C.__m256d, c int) C.__m256d {
-	return C._mm256_blend_pd(a, b, (C.int)(c))
+	return C.MM256PdBlend(a, b, (C.int)(c))
 }
 
 func M256_Blendps(a C.__m256, b C.__m256, c int) C.__m256 {
-	return C._mm256_blend_ps(a, b, (C.int)(c))
+	return C.MM256PsBlend(a, b, (C.int)(c))
 }
 
 func M256_Blendvpd(a C.__m256d, b C.__m256d, c C.__m256d) C.__m256d {
@@ -121,40 +226,40 @@ func M256_Castsi256ps(a C.__m256i) C.__m256 {
 	return C._mm256_castsi256_ps(a)
 }
 
-func M256_Castsi256si128(a C.__m256i) C.__mm128i {
+func M256_Castsi256si128(a C.__m256i) C.__m128i {
 	return C._mm256_castsi256_si128(a)
 }
 
 func M256_Ceilpd(a C.__m256d) C.__m256d {
-	return C._mm256_ceil_pd(a)
+	return C.MM256PdCeil(a)
 }
 
 func M256_Ceilps(a C.__m256) C.__m256 {
-	return C._mm256_ceil_ps(a)
+	return C.MM256PsCeil(a)
 }
 
 func MM_Cmpps(a C.__m128d, b C.__m128d, c int) C.__m128d {
-	return C._mm_cmp_pd(a, b, c)
+	return C.MMPsCmp(a, b, c)
 }
 
 func M256_Cmppd(a C.__m256d, b C.__m256d, c int) C.__m256d {
-	return C.(a, b, (C.int)(c))
+	return C.MM256PdCmp(a, b, (C.int)(c))
 }
 
 func MM_Cmpps(a C.__m128, b C.__m128, c int) C.__m128 {
-	return C._mm_cmp_ps(a, b, (C.int)(c))
+	return C.MMPsCmp(a, b, (C.int)(c))
 }
 
 func M256_Cmpps(a C.__m256, b C.__m256, c int) C.__m256 {
-	return C._m256_cmp_ps(a, b, (C.int)(c))
+	return C.MM256PsCmp(a, b, (C.int)(c))
 }
 
 func MM_Cmpsd(a C.__m128d, b C.__m128d, c int) C.__m128d {
-	return C._mm_cmp_sd(a, b, (C.int)(c))
+	return C.MMSdCmp(a, b, (C.int)(c))
 }
 
 func MM_Cmpss(a C.__m128, b C.__m128, c int) C.__m128 {
-	return C._mm_cmp_ss(a, b, (C.int)(c))
+	return C.MMSsCmp(a, b, (C.int)(c))
 }
 
 func M256_Cvtepi32pd(a C.__m128i) C.__m256d {
@@ -198,27 +303,27 @@ func M256_Divps(a C.__m256, b C.__m256) C.__m256 {
 }
 
 func M256_Dpps(a C.__m256, b C.__m256, c int) C.__m256 {
-	return C._mm256_dp_ps(a, b, (C.int)(c))
+	return C.MM256PsDp(a, b, (C.int)(c))
 }
 
 func M256_Extractf128pd(a C.__m256d, b int) C.__m128d {
-	return C._mm256_extractf128_pd(a, (C.int)(b))
+	return C.MM256PdExtractf128(a, (C.int)(b))
 }
 
 func M256_Extractf128ps(a C.__m256, b int) C.__m128 {
-	return C._mm256_extract128_ps(a, (C.int)(b))
+	return C.MM256PsExtractf128(a, (C.int)(b))
 }
 
-func M256_Extractf128si(a C.__m256i, b int) C.__m128i {
-	return C._mm256_extract128_si(a, (C.int)(b))
+func M256_Extractf128si256(a C.__m256i, b int) C.__m128i {
+	return C.MM256Si256Extractf128(a, (C.int)(b))
 }
 
 func M256_Floorpd(a C.__m256d) C.__m256d {
-	return C._mm256_floor_pd(a)
+	return C.MM256PdFloor(a)
 }
 
 func M256_Floorps(a C.__m256) C.__m256 {
-	return C._mm256_floor_ps(a)
+	return C.MM256PsFloor(a)
 }
 
 func M256_Haddpd(a C.__m256d, b C.__m256d) C.__m256d {
@@ -238,15 +343,15 @@ func M256_Hsubps(a C.__m256, b C.__m256) C.__m256 {
 }
 
 func M256_Insertf128pd(a C.__m256d, b C.__m128d, c int) C.__m256d {
-	return C._mm256_insertf128_pd(a, b, (C.int)(c))
+	return C.MM256PdInsertf128(a, b, (C.int)(c))
 }
 
 func M256_Insertf128ps(a C.__m256, b C.__m128, c int) C.__m256 {
-	return C._mm256_insertf128_ps(a, b, (C.int)(c))
+	return C.MM256PsInsertf128(a, b, (C.int)(c))
 }
 
 func M256_Insertf128si256(a C.__m256i, b C.__m128i, c int) C.__m256i {
-	return C._mm256_insertf128_si256(a, b, (C.int)(c))
+	return C.MM256Si256Insertf128(a, b, (C.int)(c))
 }
 
 func M256_Maxpd(a C.__m256d, b C.__m256d) C.__m256d {
@@ -270,7 +375,7 @@ func M256_Moveduppd(a C.__m256d) C.__m256d {
 }
 
 func M256_Movehdupps(a C.__m256) C.__m256 {
-	return C._mm256_movehdupps(a)
+	return C._mm256_movehdup_ps(a)
 }
 
 func M256_Moveldupps(a C.__m256) C.__m256 {
@@ -302,31 +407,31 @@ func M256_Orps(a C.__m256, b C.__m256) C.__m256 {
 }
 
 func M256_Permute2f128pd(a C.__m256d, b C.__m256d, c int) C.__m256d {
-	return C._mm256_permute2f128_pd(a, b, (C.int)(c))
+	return C.MM256PdPermute2f128(a, b, (C.int)(c))
 }
 
 func M256_Permute2f128ps(a C.__m256, b C.__m256, c int) C.__m256 {
-	return C._mm256_permute2f128_ps(a, b, (C.int)(c))
+	return C.MM256PsPermute2f128(a, b, (C.int)(c))
 }
 
 func M256_Permute2f128si256(a C.__m256i, b C.__m256i, c int) C.__m256i {
-	return C._mm256_permute2f128_si256(a, b, (C.int)(c))
+	return C.MM256Si256Permute2f128(a, b, (C.int)(c))
 }
 
 func MM_Permutepd(a C.__m128d, b int) C.__m128d {
-	return C._mm_permute_pd(a, (C.int)(b))
+	return C.MMPdPermute(a, (C.int)(b))
 }
 
 func M256_Permutepd(a C.__m256d, b int) C.__m256d {
-	return C._mm256_permute_pd(a, (C.int)(b))
+	return C.MM256PdPermute(a, (C.int)(b))
 }
 
 func MM_Permuteps(a C.__m128, b int) C.__m128 {
-	return C._mm_permute_ps(a, (C.int)(b))
+	return C.MMPsPermute(a, (C.int)(b))
 }
 
 func M256_Permuteps(a C.__m256, b int) C.__m256 {
-	return C._mm256_permute_ps(a, (C.int)(b))
+	return C.MM256PsPermute(a, (C.int)(b))
 }
 
 func MM_Permutevarpd(a C.__m128d, b C.__m128i) C.__m128d {
@@ -350,11 +455,11 @@ func M256_Rcpps(a C.__m256) C.__m256 {
 }
 
 func M256_Roundpd(a C.__m256d, b int) C.__m256d {
-	return C._mm256_round_pd(a, (C.int)(b))
+	return C.MM256PdRound(a, (C.int)(b))
 }
 
 func M256_Roundps(a C.__m256, b int) C.__m256 {
-	return C._mm256_round_ps(a, (C.int)(b))
+	return C.MM256PsRound(a, (C.int)(b))
 }
 
 func M256_Rsqrtps(a C.__m256) C.__m256 {
@@ -402,15 +507,15 @@ func M256_Setepi8(e31 byte, e30 byte, e29 byte, e28 byte, e27 byte, e26 byte, e2
 }
 
 func M256_Setm128(a C.__m128, b C.__m128) C.__m256 {
-	return C._mm256_set_m128(a, b)
+	return C.MM256M128Set(a, b)
 }
 
 func M256_Setm128d(a C.__m128d, b C.__m128d) C.__m256d {
-	return C._mm256_set_m128d(a, b)
+	return C.MM256M128dSet(a, b)
 }
 
 func M256_Setm128i(a C.__m128i, b C.__m128i) C.__m256i {
-	return C._mm256_set_m128i(a, b)
+	return C.MM256M128iSet(a, b)
 }
 
 func M256_Setpd(a float64, b float64, c float64, d float64) C.__m256d {
@@ -438,15 +543,15 @@ func M256_Setrepi8(e31 byte, e30 byte, e29 byte, e28 byte, e27 byte, e26 byte, e
 }
 
 func M256_Setrm128(a C.__m128, b C.__m128) C.__m256 {
-	return C._mm256_setr_m128(a, b)
+	return C.MM256M128Setr(a, b)
 }
 
 func M256_Setrm128d(a C.__m128d, b C.__m128d) C.__m256d {
-	return C._mm256_setr_m128d(a, b)
+	return C.MM256M128dSetr(a, b)
 }
 
 func M256_Setrm128i(a C.__m128i, b C.__m128i) C.__m256i {
-	return C._mm256_setr_m128i(a, b)
+	return C.MM256M128iSetr(a, b)
 }
 
 func M256_Setrpd(a float64, b float64, c float64, d float64) C.__m256d {
@@ -470,11 +575,11 @@ func M256_Setzerosi256() C.__m256i {
 }
 
 func M256_Shufflepd(a C.__m256d, b C.__m256d, c int) C.__m256d {
-	return C._mm256_shuffle_pd(a, b, (C.int)(c))
+	return C.MM256PdShuffle(a, b, (C.int)(c))
 }
 
 func M256_Shuffleps(a C.__m256, b C.__m256, c int) C.__m256 {
-	return C._mm256_shuffle_ps(a, b, (C.int)(c))
+	return C.MM256PsShuffle(a, b, (C.int)(c))
 }
 
 func M256_Sqrtpd(a C.__m256d) C.__m256d {
