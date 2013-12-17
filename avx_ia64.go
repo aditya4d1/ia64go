@@ -487,7 +487,7 @@ func M256_Setepi64x(a int64, b int64, c int64, d int64) C.__m256i {
 func M256_Setepi8(e31 byte, e30 byte, e29 byte, e28 byte, e27 byte, e26 byte, e25 byte, e24 byte, e23 byte, e22 byte, e21 byte, e20 byte, e19 byte, e18 byte, e17 byte, e16 byte, e15 byte, e14 byte, e13 byte, e12 byte, e11 byte, e10 byte, e9 byte, e8 byte, e7 byte, e6 byte, e5 byte, e4 byte, e3 byte, e2 byte, e1 byte, e0 byte) C.__m256i {
 	return C._mm256_set_epi8((C.char)(e31), (C.char)(e30), (C.char)(e29), (C.char)(e28), (C.char)(e27), (C.char)(e26), (C.char)(e25), (C.char)(e24), (C.char)(e23), (C.char)(e22), (C.char)(e21), (C.char)(e20), (C.char)(e19), (C.char)(e18), (C.char)(e17), (C.char)(e16), (C.char)(e15), (C.char)(e14), (C.char)(e13), (C.char)(e12), (C.char)(e11), (C.char)(e10), (C.char)(e9), (C.char)(e8), (C.char)(e7), (C.char)(e6), (C.char)(e5), (C.char)(e4), (C.char)(e3), (C.char)(e2), (C.char)(e1), (C.char)(e0))
 }
-
+/*
 func M256_Setm128(a C.__m128, b C.__m128) C.__m256 {
 	return C.MM256M128Set(a, b)
 }
@@ -499,7 +499,7 @@ func M256_Setm128d(a C.__m128d, b C.__m128d) C.__m256d {
 func M256_Setm128i(a C.__m128i, b C.__m128i) C.__m256i {
 	return C.MM256M128iSet(a, b)
 }
-
+*/
 func M256_Setpd(a float64, b float64, c float64, d float64) C.__m256d {
 	return C._mm256_set_pd((C.double)(a), (C.double)(b), (C.double)(c), (C.double)(d))
 }
@@ -523,7 +523,7 @@ func M256_Setrepi64x(a int64, b int64, c int64, d int64) C.__m256i {
 func M256_Setrepi8(e31 byte, e30 byte, e29 byte, e28 byte, e27 byte, e26 byte, e25 byte, e24 byte, e23 byte, e22 byte, e21 byte, e20 byte, e19 byte, e18 byte, e17 byte, e16 byte, e15 byte, e14 byte, e13 byte, e12 byte, e11 byte, e10 byte, e9 byte, e8 byte, e7 byte, e6 byte, e5 byte, e4 byte, e3 byte, e2 byte, e1 byte, e0 byte) C.__m256i {
 	return C._mm256_setr_epi8((C.char)(e31), (C.char)(e30), (C.char)(e29), (C.char)(e28), (C.char)(e27), (C.char)(e26), (C.char)(e25), (C.char)(e24), (C.char)(e23), (C.char)(e22), (C.char)(e21), (C.char)(e20), (C.char)(e19), (C.char)(e18), (C.char)(e17), (C.char)(e16), (C.char)(e15), (C.char)(e14), (C.char)(e13), (C.char)(e12), (C.char)(e11), (C.char)(e10), (C.char)(e9), (C.char)(e8), (C.char)(e7), (C.char)(e6), (C.char)(e5), (C.char)(e4), (C.char)(e3), (C.char)(e2), (C.char)(e1), (C.char)(e0))
 }
-
+/*
 func M256_Setrm128(a C.__m128, b C.__m128) C.__m256 {
 	return C.MM256M128Setr(a, b)
 }
@@ -535,7 +535,7 @@ func M256_Setrm128d(a C.__m128d, b C.__m128d) C.__m256d {
 func M256_Setrm128i(a C.__m128i, b C.__m128i) C.__m256i {
 	return C.MM256M128iSetr(a, b)
 }
-
+*/
 func M256_Setrpd(a float64, b float64, c float64, d float64) C.__m256d {
 	return C._mm256_setr_pd((C.double)(a), (C.double)(b), (C.double)(c), (C.double)(d))
 }
