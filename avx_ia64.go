@@ -63,26 +63,6 @@ package avx_ia64
  __m256 MM256PsRound(__m256 a, int b){
 	return (__m256)_mm256_round_ps(a, b);
  }
-/*
- Not defined in all GCC
- __m256 MM256M128Set(__m128 a, __m128 b){
-	return (__m256)_mm256_set_m128(a, b);
- }
- __m256d MM256M128dSet(__m128d a, __m128d b){
-	return (__m256d)_mm256_set_m128d(a, b);
- }
- __m256i MM256M128iSet(__m128i a, __m128i b){
-	return (__m256i)_mm256_set_m128i(a, b);
- }
- __m256 MM256M128Setr(__m128 a, __m128 b){
-	return (__m256)_mm256_setr_m128(a, b);
- }
- __m256i MM256M128iSetr(__m128i a, __m128i b){
-	return (__m256i)_mm256_setr_m128i(a, b);
- }
- __m256d MM256M128dSetr(__m128d a, __m128d b){
-	return (__m256d)_mm256_setr_m128d(a, b);
- }
  __m128d MM256PdExtractf128(__m256d a, int b){
 	return (__m128d)_mm256_extractf128_pd(a, b);
  }
@@ -611,3 +591,25 @@ func M256_Subpd(a C.__m256d, b C.__m256d) C.__m256d {
 func M256_Subps(a C.__m256, b C.__m256) C.__m256 {
 	return C._mm256_sub_ps(a, b)
 }
+
+
+/*
+ __m256 MM256M128Set(__m128 a, __m128 b){
+	return (__m256)_mm256_set_m128(a, b);
+ }
+ __m256d MM256M128dSet(__m128d a, __m128d b){
+	return (__m256d)_mm256_set_m128d(a, b);
+ }
+ __m256i MM256M128iSet(__m128i a, __m128i b){
+	return (__m256i)_mm256_set_m128i(a, b);
+ }
+ __m256 MM256M128Setr(__m128 a, __m128 b){
+	return (__m256)_mm256_setr_m128(a, b);
+ }
+ __m256i MM256M128iSetr(__m128i a, __m128i b){
+	return (__m256i)_mm256_setr_m128i(a, b);
+ }
+ __m256d MM256M128dSetr(__m128d a, __m128d b){
+	return (__m256d)_mm256_setr_m128d(a, b);
+ }
+*/
