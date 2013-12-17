@@ -63,6 +63,8 @@ package avx_ia64
  __m256 MM256PsRound(__m256 a, int b){
 	return (__m256)_mm256_round_ps(a, b);
  }
+/*
+ Not defined in all GCC
  __m256 MM256M128Set(__m128 a, __m128 b){
 	return (__m256)_mm256_set_m128(a, b);
  }
